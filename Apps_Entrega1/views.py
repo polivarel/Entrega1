@@ -31,13 +31,15 @@ def ingresar_pelicula(request):
    return HttpResponse(template.render(context, request))
 
 def peliculas(request):
-   mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
+   return render(request, "Apps_Entrega1/peliculas.html")
+
+   #mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
    #template = get_template('IngresarPelicula.html')
-   template = loader.get_template('peliculas.html')
-   context = {
-   'mymembers': mymembers,
-   }
-   return HttpResponse(template.render(context, request))
+   #template = loader.get_template('peliculas.html')
+   #context = {
+   #'mymembers': mymembers,
+  # }
+   #return HttpResponse(template.render(context, request))
 
 def ingresar_teatro(request):
     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
