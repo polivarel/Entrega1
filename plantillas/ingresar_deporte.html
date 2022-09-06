@@ -13,8 +13,11 @@
         <input type="text" placeholder="LUGAR"><br><br>
         <input type="text" placeholder="TITULO"><br><br>
         <input type="time" placeholder="HORA INICIO"><br><br>
-        <input type="number" placeholder="EDAD MINIMA" min="1"><br><br>
-        <input type="range" placeholder="PUNTAJE" id="PUNTAJE" name="PUNTAJE" onchange="cambiar(this.value)"><br><label for="PUNTAJE" id="lab_puntaje">50 Puntos</label><br><br>
+        <input type="text" placeholder="EQUIPO1"><br><br>
+        <input type="text" placeholder="EQUIPO2"><br><br>
+        <input type="text" placeholder="DEPORTE"><br><br>
+              
+        
         <input type="submit" value="INGRESAR" min="0" max="100" ><br>
     </form>
 </div>
@@ -25,13 +28,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 <script>
-//$( "#lab_puntaje" ).slider(function() {
-//    $("#lab_puntaje").html($("#PUNTAJE").val()); 
-//});
-
-function cambiar(Valor){
-    $("#lab_puntaje").html(Valor+" Puntos");
-}
 
 
 </script>
