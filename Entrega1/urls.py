@@ -19,8 +19,12 @@ from Apps_Entrega1.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", inicio, name="inicio"),
-    path("peliculas/", peliculas, name="peliculas"),
-    path("teatro/", teatro, name="teatro"),
-    path("deporte/", deporte, name="deporte"),
+    path('inicio/', inicio),
+    path('padre/', padre),
+    path("peliculas/", peliculas),
+    path("ingresar_pelicula/", ingresar_pelicula),
+    path("teatro/", teatro),
+    path("ingresar_teatro/", ingresar_teatro),
+    path("deporte/", deporte),
+    path("ingresar_deporte/", ingresar_deporte),
 ]
