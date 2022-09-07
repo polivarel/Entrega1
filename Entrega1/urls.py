@@ -27,4 +27,9 @@ urlpatterns = [
     path("deporte/"  , deporte,   name="deporte"),
     path("peliculas/", peliculas, name="peliculas"),
     path("ok/"       , ok,        name="ok"),
+    path("peliculasFormulario/", peliculasFormulario, name="peliculasFormulario"),
+    path("teatroFormulario/", teatroFormulario, name="teatroFormulario"),
+    path("deporteFormulario/", deporteFormulario, name="deporteFormulario"),
+    path("busquedaPelicula/", busquedaPelicula, name="busquedaPelicula"),
+    path("buscar/", buscar, name="buscar"),
 ]
