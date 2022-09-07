@@ -9,6 +9,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Ticketera de eventos</title>
+        <!-- JavaScript-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -28,12 +30,11 @@
         </style>
     </head>
  
- 
-
         <div  id="menu">
+            <a class="nav-link" href="{% url 'buscar' %}"   ><div class="menu_item" name="bt_buscar"   >BUSCAR   </div></a>
             <a class="nav-link" href="{% url 'peliculas' %}"><div class="menu_item" name="bt_peliculas">PELICULAS</div></a>
-            <a class="nav-link" href="{% url 'teatro' %}"><div class="menu_item" name="bt_teatro">TEATRO</div></a>
-            <a class="nav-link" href="{% url 'deporte' %}"><div class="menu_item" name="bt_deporte">DEPORTE</div></a>
+            <a class="nav-link" href="{% url 'teatro' %}"   ><div class="menu_item" name="bt_teatro"   >TEATRO   </div></a>
+            <a class="nav-link" href="{% url 'deporte' %}"  ><div class="menu_item" name="bt_deporte"  >DEPORTE  </div></a>
         </div>
 
 
