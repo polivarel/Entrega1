@@ -16,10 +16,13 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
+from Apps_Entrega1.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("Apps_Entrega1/", include("Apps_Entrega1.urls")),
-
+    path('admin/'    , admin.site.urls),
+    path('', index, name='index'),  #al no poner nada, se carga el index.html cuando abres la pagina
+    path("teatro/"   , teatro, name="teatro"),
+    path("deporte/"  , deporte, name="deporte"),
+    path("peliculas/", peliculas, name="peliculas"),
 ]
