@@ -14,14 +14,6 @@ def index(request):
     }
     return HttpResponse(template2.render(context, request))
 
-#def buscar(request):
-    #mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-    #template2 = loader.get_template('buscar.html')
-    #context = {
-    #'mymembers': mymembers,
-    #}
-    #return HttpResponse(template2.render(context, request))
-
 def deporte(request):
     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
     template2 = loader.get_template('deporte.html')
@@ -29,14 +21,6 @@ def deporte(request):
     'mymembers': mymembers,
     }
     return HttpResponse(template2.render(context, request))
-
-def ok(request):
-    mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-    template1 = loader.get_template('ok.html')
-    context = {
-    'mymembers': mymembers,
-    }
-    return HttpResponse(template1.render(context, request))
 
 
 def teatro(request):
@@ -47,36 +31,18 @@ def teatro(request):
     }
     return HttpResponse(template1.render(context, request))
 
-# def peliculas(request):
-#     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-#     template1 = loader.get_template('peliculas.html')
-#     context = {
-#     'mymembers': mymembers,
-#     }
-#     return HttpResponse(template1.render(context, request))
-
-def peliculas(request):
-    if request.method == 'POST':
-        FormPelicula = IngPeli(request.POST)
-        print(FormPelicula)
-        if FormPelicula.is_valid:
-            informacion = FormPelicula.cleaned_data
-            peli = IngPeli(fecha_inicio=informacion['fecha_inicio'],lugar=informacion['lugar'],titulo=informacion['titulo'],hora_inicio=informacion['hora_inicio'],edad_minima=informacion['edad_minima'],puntaje=informacion['puntaje'])
-            peli.save()
-            return render(request,"App_Entrega1/test.html")
-    else:
-        FormPelicula=FormPelicula()
-    return render(request, "App_Entrega1/peliculas.html",{})    
-
-
 def peliculasFormulario(request):
     if request.method=="POST":
         form=PeliForm(request.POST)
         if form.is_valid():
             informacion=form.cleaned_data
-            titulo=informacion["titulo"]
+            fecha_inicio=informacion["fecha_inicio"]
             lugar=informacion["lugar"]
-            pelicula=Peliculas(titulo=titulo, lugar=lugar)
+            titulo=informacion["titulo"]
+            hora_inicio=informacion["hora_inicio"]
+            edad_minima=informacion["edad_minima"]
+            puntaje=informacion["puntaje"]
+            pelicula=Peliculas(fecha_inicio=fecha_inicio,lugar=lugar,titulo=titulo, hora_inicio=hora_inicio,edad_minima=edad_minima,puntaje=puntaje)
             pelicula.save()
             return render (request, "index.html")
     else:
