@@ -21,9 +21,14 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <style>
+            body{
+                background-image: url("{% static 'assets/fondo.jpg' %}");
+                 background-repeat: no-repeat; 
+                 background-size: cover; 
+            } 
             #menu{display: flex;  justify-content:center; flex-direction: row; width: 90%; margin-left:5%; margin-top:0%;  background-color: bisque; height: 100px; z-index:1999 ; margin-bottom: 10px;
                 border-radius: 0px 0px 50px 50px;    
-                background-image: url({% static 'assets/cuerina.jpg' %});
+                background-image: url("{% static 'assets/cuerina.jpg' %}");
             }
             .menu_item{ 
                 border: 1px solid rgb(146, 108, 108); 
@@ -40,7 +45,7 @@
             #pie{display: flex; position: fixed; bottom:0; justify-content:center; width: 100%; }
         </style>
     </head>
-    <body style="background-image: url({% static 'assets/fondo.jpg' %}); background-repeat: no-repeat; background-size: cover; ">
+    <body>
         <div  id="menu">
             <a class="nav-link" href="{% url 'busquedaPelicula' %}"   ><div class="menu_item" name="bt_buscar"   >BUSCAR   </div></a>
             <a class="nav-link" href="{% url 'peliculasFormulario' %}"><div class="menu_item" name="bt_peliculas">PELICULAS</div></a>
@@ -60,7 +65,9 @@
 
 
 
-        <div id="pie">
-           Este es el pie de la pagina
+        <div id="pie" style="color: azure; padding:10px ;">
+           Proyecto Entrega 1 - Python<br>
+           Nicolas Villa<br>
+           Pablo Olivare
         </div>
     </body>    
