@@ -1,11 +1,37 @@
 #from socket import fromshare
+from typing import Any, Dict, Iterable, List, Optional, Type, TypeVar, Union
+
+from django import forms
 from unittest.util import _MAX_LENGTH
 from django import forms
 import datetime
 
-class formIngresarUsuario(forms.Form):
-    usuario = forms.CharField()
-    clave   = forms.CharField()
+
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core.exceptions import ValidationError
+from django.db import models
+#from django.forms.fields import _ClassLevelWidgetT
+from django.forms.widgets import Widget
+from django.http.request import HttpRequest
+
+UserModel: Type[AbstractBaseUser]
+_User = TypeVar("_User", bound=AbstractBaseUser)
+
+
+
+class AuthenticationForm(forms.Form):
+    username: forms.Field = ...
+    password: forms.Field = ...
+    #error_messages: _ErrorMessagesT = ...
+    request: Optional[HttpRequest] = ...
+    user_cache: Any = ...
+    username_field: models.Field = ...
+    def __init__(self, request: Optional[HttpRequest] = ..., *args: Any, **kwargs: Any) -> None: ...
+    def confirm_login_allowed(self, user: AbstractBaseUser) -> None: ...
+    def get_user(self) -> AbstractBaseUser: ...
+    def get_invalid_login_error(self) -> ValidationError: ...
+    def clean(self) -> Dict[str, Any]: ...
 
 
 class PeliForm(forms.Form):

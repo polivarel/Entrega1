@@ -5,10 +5,11 @@
 {% block cuerpo %}
 
     <form action="{% url 'form_ingresar_usuario' %}" method="POST"> {% csrf_token %}
+        
         <table>
             {{ formulario.as_table }}
         </table>
         <input type="submit" value="Ingresar">
     </form>
-
+{{ mensaje }}
 {% endblock %} 

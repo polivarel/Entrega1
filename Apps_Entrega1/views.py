@@ -6,6 +6,12 @@ from django.template import loader
 from Apps_Entrega1.forms import *
 from Apps_Entrega1.models import *
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
@@ -15,20 +21,32 @@ def index(request):
     }
     return HttpResponse(template2.render(context, request))
 
+            
 def form_ingresar_usuario(request):
     if request.method=="POST":
-        form=formIngresarUsuario(request.POST)
+        form=AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            informacion=form.cleaned_data
-            usuario=informacion["usuario"]
-            clave=informacion["clave"]
-            user = authenticate(username=usuario, password=clave)
-            formulario=formIngresarUsuario()
-            if user is not None:
-                return render(request, "00usuario_ingresar.html", {"formulario":formulario})
+            usu=request.POST["username"]
+            clave=request.POST["password"]
+
+            usuario=authenticate(username=usu, password=clave)
+            if usuario is not None:
+                login(request, usuario)
+                return render(request, '00usuario_ingresar.html', {'mensaje':f"Bienvenido {usuario}"})
             else:
-                return render(request, "resultadosBusqueda.html", {"formulario":formulario})
-            
+                return render(request, "00usuario_ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
+        else:
+            return render(request, "00usuario_ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
+                
+    else:
+        form=AuthenticationForm()
+        return render(request, "00usuario_ingresar.html", {"formulario":form})
+
+
+
+
+
+
 
 
 
