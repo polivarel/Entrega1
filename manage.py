@@ -2,7 +2,10 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import webbrowser
 
+url = 'http://127.0.0.1:8000/'
+webbrowser.open(url)
 
 def main():
     """Run administrative tasks."""

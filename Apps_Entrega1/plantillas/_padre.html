@@ -12,7 +12,9 @@
         <!-- JavaScript-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8000/static/assets/favicon.ico" />
+        <link rel="shortcut icon" href="static/assets/favicon.ico"/>
+        <link rel="ICON" href="favicon.ico" type="image/ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -21,24 +23,32 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <style>
+            body{ background: #F1F1F1; }
+
+            #menu{
+                display: flex;
+                justify-content:space-between;
+                flex-direction: row;
+                width: 100%;
+                margin-top:1%;
+                background-color:#CFE2D0;
+                height: 100px;
+                z-index:1999 ;
+                margin-bottom: 5px;
+                border: none;
+                align-items:center;
+            }
+            .menu_inicio{margin-right: auto; margin-left:1% ;}
+            .menu_items{margin-left:20px; margin-right:20px;}
+            .menu_salir{margin-left: auto; margin-right:1%;}
+     
+
             body{
-                background-image: url("{% static 'assets/fondo.jpg' %}");
+                /* background-image: url("{% static 'assets/fondo.jpg' %}"); */
                  background-repeat: no-repeat; 
                  background-size: cover; 
             } 
-            #menu{display: flex;  justify-content:center; flex-direction: row; width: 90%; margin-left:5%; margin-top:0%;  background-color: bisque; height: 100px; z-index:1999 ; margin-bottom: 10px;
-                border-radius: 0px 0px 50px 50px;    
-                background-image: url("{% static 'assets/cuerina.jpg' %}");
-            }
-            .menu_item{ 
-                border: 1px solid rgb(146, 108, 108); 
-                z-index:2222 ; 
-                text-align: center; 
-                border-radius: 30px 30px 30px 30px; 
-                background-color: bisque; 
-                font-size: 1.5vw;
-                padding: 10px;
-            }
+
 
             #cuerpo{display: flex; position: relative; justify-content:center; width: 100%; }
 
@@ -47,13 +57,21 @@
     </head>
     <body>
         <div  id="menu">
-            <a class="nav-link" href="{% url 'busquedaPelicula' %}"   ><div class="menu_item" name="bt_buscar"   >BUSCAR   </div></a>
-            <a class="nav-link" href="{% url 'peliculasFormulario' %}"><div class="menu_item" name="bt_peliculas">PELICULAS</div></a>
-            <a class="nav-link" href="{% url 'teatro' %}"             ><div class="menu_item" name="bt_teatro"   >TEATRO   </div></a>
-            <a class="nav-link" href="{% url 'deporte' %}"            ><div class="menu_item" name="bt_deporte"  >DEPORTE  </div></a>
+            <div class="menu_inicio">
+                 <img src="{% static 'assets/img/icono_inicio.png' %}"    height="50px"> 
+            </div>
+            <div class="menu_items">
+                <img src="{% static 'assets/img/icono_buscar.png' %}"    height="50px"> 
+                <img src="{% static 'assets/img/icono_peliculas.png' %}" height="50px"> 
+                <img src="{% static 'assets/img/icono_teatro.png' %}"    height="50px"> 
+                 <img src="{% static 'assets/img/icono_deportes.png' %}"  height="50px">
+            </div>
+            <div class="menu_salir">
+                 <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px">
+            </div>
         </div>
 
-
+<hr>
         <div id="cuerpo" style="background-color:white ; padding:40px;">
             {% block cuerpo %}
 
