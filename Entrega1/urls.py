@@ -22,6 +22,7 @@ from Apps_Entrega1.views import *
 urlpatterns = [
     path('admin/'    , admin.site.urls),
     path('', index, name='index'),  #al no poner nada, se carga el index.html cuando abres la pagina
+    path("form_ingresar_usuario/", form_ingresar_usuario, name="usuarioIngresar"),
     path("buscar/"   , buscar,    name="buscar"),
     path("teatro/"   , teatro,    name="teatro"),
     path("deporte/"  , deporte,   name="deporte"),

@@ -1,7 +1,12 @@
-from socket import fromshare
+#from socket import fromshare
 from unittest.util import _MAX_LENGTH
 from django import forms
 import datetime
+
+class formIngresarUsuario(forms.Form):
+    usuario = forms.CharField()
+    clave   = forms.CharField()
+
 
 class PeliForm(forms.Form):
     fecha_inicio = forms.DateField(initial=datetime.date.today, widget=forms.widgets.DateInput(attrs={'type': 'date'}))

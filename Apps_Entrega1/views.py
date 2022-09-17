@@ -5,6 +5,7 @@ from random import *
 from django.template import loader
 from Apps_Entrega1.forms import *
 from Apps_Entrega1.models import *
+from django.contrib.auth import authenticate
 
 def index(request):
     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
@@ -13,6 +14,26 @@ def index(request):
     'mymembers': mymembers,
     }
     return HttpResponse(template2.render(context, request))
+
+def form_ingresar_usuario(request):
+    if request.method=="POST":
+        form=formIngresarUsuario(request.POST)
+        if form.is_valid():
+            informacion=form.cleaned_data
+            usuario=informacion["usuario"]
+            clave=informacion["clave"]
+            user = authenticate(username=usuario, password=clave)
+            formulario=formIngresarUsuario()
+            if user is not None:
+                return render(request, "00usuario_ingresar.html", {"formulario":formulario})
+            else:
+                return render(request, "resultadosBusqueda.html", {"formulario":formulario})
+            
+
+
+
+
+
 
 def deporte(request):
     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
