@@ -19,7 +19,8 @@ UserModel: Type[AbstractBaseUser]
 _User = TypeVar("_User", bound=AbstractBaseUser)
 
 
-
+#===============================================================================
+#=========================== FORMULARIOS DEL USUARIO ===========================
 class AuthenticationForm(forms.Form):
     username: forms.Field = ...
     password: forms.Field = ...
@@ -32,6 +33,26 @@ class AuthenticationForm(forms.Form):
     def get_user(self) -> AbstractBaseUser: ...
     def get_invalid_login_error(self) -> ValidationError: ...
     def clean(self) -> Dict[str, Any]: ...
+
+class form_recuperar_usuario(forms.Form):
+    correo = forms.EmailField()
+
+
+
+#===============================================================================
+#=========================== FORMULARIOS DEL USUARIO ===========================
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class PeliForm(forms.Form):

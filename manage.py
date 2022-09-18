@@ -4,8 +4,9 @@ import os
 import sys
 import webbrowser
 
-url = 'http://127.0.0.1:8000/'
-webbrowser.open(url)
+#Se Abre la pagina de forma automatica luego de ejecutar el comando "python manage.py runserver"
+#url = 'http://127.0.0.1:8000/'
+#webbrowser.open(url)
 
 def main():
     """Run administrative tasks."""

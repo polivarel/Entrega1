@@ -32,7 +32,7 @@ def form_ingresar_usuario(request):
             usuario=authenticate(username=usu, password=clave)
             if usuario is not None:
                 login(request, usuario)
-                return render(request, '00usuario_ingresar.html', {'mensaje':f"Bienvenido {usuario}"})
+                return render(request, '00usuario_ingresar.html', {'mensaje':f"{usuario}"})
             else:
                 return render(request, "00usuario_ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
         else:
@@ -41,7 +41,6 @@ def form_ingresar_usuario(request):
     else:
         form=AuthenticationForm()
         return render(request, "00usuario_ingresar.html", {"formulario":form})
-
 
 
 

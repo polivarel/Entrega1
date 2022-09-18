@@ -18,11 +18,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from Apps_Entrega1.views import *
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/'    , admin.site.urls),
     path('', index, name='index'),  #al no poner nada, se carga el index.html cuando abres la pagina
-    path("form_ingresar_usuario/", form_ingresar_usuario, name="form_ingresar_usuario"),
+    path("ingresar/", form_ingresar_usuario, name="form_ingresar_usuario"),
+    path('salir', LogoutView.as_view(next_page="/ingresar"), name='salir'),
+    path("recuperar/", form_recuperar_usuario, name="form_recuperar_usuario"),
     path("buscar/"   , buscar,    name="buscar"),
     path("teatro/"   , teatro,    name="teatro"),
     path("deporte/"  , deporte,   name="deporte"),

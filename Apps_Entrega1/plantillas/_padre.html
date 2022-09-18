@@ -50,10 +50,9 @@
             .menu_inicio{margin-right: auto; margin-left:1% ;}
             .menu_items{width:30%; display: flex;justify-content:space-between; }
             .menu_salir{display: flex;  align-items:center; margin-left: auto; margin-right:1%; box-sizing: border-box;}
-            .menu_hover_item{box-sizing: border-box;}
+            .menu_hover_item{box-sizing: border-box; border-bottom: 2px solid #CFE2D0; }
             .menu_hover_item:hover{
-                height: 60px;
-                cursor: pointer;
+                cursor: pointer; box-shadow: blue;
                 border-bottom: 2px solid grey; 
                 -webkit-transition: all 300ms ease;
                 -moz-transition:    all 300ms ease;
@@ -70,32 +69,45 @@
                 height: 100%;
              }
 
+
+             #cuerpo form input{ margin-top: 10px;}
+
+
+
+
+
+
             #pie{display: flex;  bottom:0; justify-content:center; width: 100%; background: black;}
         </style>
+        <script>    
+            //Esta Funcion redirecciona a la pagina de inicio "direccion"
+            function irA(direccion){window.location.replace(direccion);}
+        </script>
     </head>
     <body>
         <div  id="menu">
             <div class="menu_inicio">
-                <img src="{% static 'assets/img/icono_inicio.png' %}"    height="50px" class="menu_hover_item"> 
+                <img src="{% static 'assets/img/icono_inicio.png' %}"    height="50px" class="menu_hover_item" onclick='irA("/")'> 
             </div>
             <div class="menu_items">
-                <img src="{% static 'assets/img/icono_listar.png' %}"    height="50px" class="menu_hover_item">
-                <img src="{% static 'assets/img/icono_buscar.png' %}"    height="50px" class="menu_hover_item">  
-                <img src="{% static 'assets/img/icono_peliculas.png' %}" height="50px" class="menu_hover_item"> 
-                <img src="{% static 'assets/img/icono_teatro.png' %}"    height="50px" class="menu_hover_item"> 
-                <img src="{% static 'assets/img/icono_deportes.png' %}"  height="50px" class="menu_hover_item">
+                <img src="{% static 'assets/img/icono_listar.png' %}"    height="50px" class="menu_hover_item" onclick='irA("/ingresar")'>
+                <img src="{% static 'assets/img/icono_buscar.png' %}"    height="50px" class="menu_hover_item" onclick='irA("/busquedaPelicula")'>  
+                <img src="{% static 'assets/img/icono_peliculas.png' %}" height="50px" class="menu_hover_item" onclick='irA("/peliculasFormulario")'> 
+                <img src="{% static 'assets/img/icono_teatro.png' %}"    height="50px" class="menu_hover_item" onclick='irA("/teatroFormulario")'> 
+                <img src="{% static 'assets/img/icono_deportes.png' %}"  height="50px" class="menu_hover_item" onclick='irA("/deporteFormulario")'>
             </div>
             <div class="menu_salir">
-                {% if user %}
-                <div  class="menu_hover_item">Ingresar
+                {% if not user.is_authenticated %}
+                <div  class="menu_hover_item" onclick='irA("/ingresar")'>Ingresar
                 <img src="{% static 'assets/img/icono_entrar.png' %}"     height="50px"></div>
                 {% else %}
-                <div  class="menu_hover_item">{{ user }}
-                <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"></div>
+                <a href="{% url 'salir' %}">
+                <div  class="menu_hover_item" >{{ user }}
+                <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"></div></a>
                 {% endif %}
             </div>
         </div>
-        <div id="cuerpo" style="border:2px solid red; ">
+        <div id="cuerpo">
             {% block cuerpo %}
             {% endblock %}
         </div>
@@ -105,3 +117,4 @@
            Pablo Olivare
         </div>
     </body>    
+
