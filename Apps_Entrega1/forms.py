@@ -1,3 +1,4 @@
+from logging import PlaceHolder
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -46,15 +47,17 @@ class form_recuperar_usuario(forms.Form):
 
 #@login_required
 class form_crear_usuario(UserCreationForm):
-    username = forms.CharField(max_length=30, required=True, help_text='Requerido. 30 caracteres o menos. Letras, dígitos y @/./+/-/_ solamente.')  
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    password1 = forms.CharField(label='Ingrese la contraseña', max_length=100, widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirme la contraseña', max_length=100, widget=forms.PasswordInput)
+    first_name = forms.CharField( label='Nombre'                ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su nombre.'}))
+    last_name  = forms.CharField( label='Apellido'              ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su apellido'}))   
+    username   = forms.CharField( label='Usuario'               ,max_length=30, required=True , widget=forms.TextInput(attrs= {'title':'Requerido. 30 caracteres o menos. Letras, dígitos y @/./+/-/_ solamente.'}))  
+    email      = forms.EmailField(label='Correo'                ,max_length=254,required=True , widget=forms.EmailInput(attrs={'title':'Requerido. Ingrese una dirección de correo electrónico válida.'}))
+    password1  = forms.CharField( label='Ingrese la contraseña' ,max_length=100, widget=forms.PasswordInput)
+    password2  = forms.CharField( label='Confirme la contraseña',max_length=100, widget=forms.PasswordInput)
     
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
-        help_texts = {k:"" for k in fields}
+        fields = ['first_name','last_name','username', 'email', 'password1', 'password2']
+    
 
 
 

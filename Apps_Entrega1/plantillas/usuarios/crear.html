@@ -3,12 +3,29 @@
 {% load static %}
 
 {% block cuerpo %}
-  <h2>Crear usuario</h2><br>
+{% if mensaje %}
+    <p>Usuario <b>{{ mensaje }}</b> creado correctamente ! <br> Redireccionando en <span id="redirecionando">4</span></p>
+    <script>
+        var segundos = 4;
+        var redirecionando = document.getElementById("redirecionando");
+        var intervalo = setInterval(function(){
+            segundos--;
+            redirecionando.innerHTML = segundos;
+            if(segundos == 0){
+                clearInterval(intervalo);
+                irA("/");
+            }
+        }, 1000);
+    </script>
+{% else %}
+  <style>.errorlist{color:red;}</style>
   <form action="{% url 'form_crear_usuario' %}" method="POST">{% csrf_token %}
+    <h2 style="text-align:center;">Crear usuario</h2><br>
     <table>
       {{ formulario.as_table }}
-    </table>
-    <button type="submit">Registrar</button>
+    </table><br>
+    <button type="submit" style="width:100%;">Registrar</button><br><br><br>
+    <h2 style="text-align:center; color:red;">{{ mensaje }} </h2>  
   </form><br>
-  <h2>{{ mensaje }} </h2>  
+{% endif %}  
 {% endblock %}

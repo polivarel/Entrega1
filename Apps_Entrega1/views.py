@@ -47,16 +47,16 @@ def form_ingresar_usuario(request):
 
 
 
-def form_crear_usuario(request):
+def crear_usuario(request):
     if request.method == 'POST':
         form = form_crear_usuario(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             form.save()
-            return render(request, 'usuarios/crear.html', {'mensaje':f" creado: {username} correctamente"})
+            return render(request, 'usuarios/crear.html', {'mensaje':username})
         else:
-            return render(request, "usuarios/crear.html", {"formulario":form, "mensaje":"FORMULARIO INVALIDO"})    
+            return render(request, "usuarios/crear.html", {"formulario":form})    
     else:
         form = form_crear_usuario()
         return render(request, 'usuarios/crear.html', {'formulario': form})
