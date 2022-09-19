@@ -59,7 +59,16 @@ class form_crear_usuario(UserCreationForm):
         fields = ['first_name','last_name','username', 'email', 'password1', 'password2']
     
 
-
+class form_editar_usuario(forms.Form):
+    id         = forms.IntegerField(widget=forms.HiddenInput())
+    first_name = forms.CharField( label='Nombre'                ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su nombre.'}))
+    last_name  = forms.CharField( label='Apellido'              ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su apellido'}))   
+    username   = forms.CharField( label='Usuario'               ,max_length=30, required=True , widget=forms.TextInput(attrs= {'title':'Requerido. 30 caracteres o menos. Letras, dígitos y @/./+/-/_ solamente.'}))  
+    email      = forms.EmailField(label='Correo'                ,max_length=254,required=True , widget=forms.EmailInput(attrs={'title':'Requerido. Ingrese una dirección de correo electrónico válida.'}))
+      
+    class Meta:
+        model = User
+        fields = ['id','first_name','last_name','username', 'email' ]
 
 
 #===============================================================================

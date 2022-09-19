@@ -62,8 +62,28 @@ def crear_usuario(request):
         return render(request, 'usuarios/crear.html', {'formulario': form})
 
 
+def listar_usuarios(request):
+    usuarios = User.objects.all()
+    return render(request, "usuarios/listar.html", {"usuarios":usuarios})
 
 
+
+def editar_usuarios(request, id):
+    usuario = User.objects.get(id=id)
+    if request.method == 'POST':
+        form = form_editar_usuario(request.POST)
+        if form.is_valid():
+            usuario.username   = form.cleaned_data.get('username')
+            usuario.password   = form.cleaned_data.get('password1')
+            usuario.first_name = form.cleaned_data.get('first_name')
+            usuario.last_name  = form.cleaned_data.get('last_name')
+            usuario.email      = form.cleaned_data.get('email')
+            usuario.save()
+            return render(request, 'usuarios/editar.html', {'mensaje':usuario.username})
+    else:
+        form = form_editar_usuario(initial=({'username':usuario.username, 'first_name':usuario.first_name, 'last_name':usuario.last_name, 'email':usuario.email}))
+        return render(request, 'usuarios/editar.html', {'formulario': form, usuario:usuario})
+    
 
 #=================== USUARIOS ===============================================================================            
 #============================================================================================================

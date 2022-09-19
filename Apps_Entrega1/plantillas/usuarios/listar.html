@@ -1,0 +1,39 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+    {% if usuarios %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        th{
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+        <table> <tr><th>ID              </th><th>Usuario               </th><th>Nombre                  </th><th>Apellido               </th><th>Correo             </th><th>Editar</th><th>Borrar</th></tr>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.first_name }}</td>
+                    <td>{{ usuario.last_name }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td><a href="{% url 'form_editar_usuario' usuario.id %}"><img src="{% static 'assets/img/icono_editar.png' %}"     height="30px"></a></td>
+                    <td><a href="{% url 'form_editar_usuario' usuario.id %}"><img src="{% static 'assets/img/icono_borrar.png' %}"     height="30px"></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No hay usuarios registrados.</p>
+    {% endif %}
+    
+
+{% endblock %}
