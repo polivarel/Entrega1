@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/'    , admin.site.urls),
     path('', index, name='index'),  #al no poner nada, se carga el index.html cuando abres la pagina
     path("ingresar/", form_ingresar_usuario, name="form_ingresar_usuario"),
+    path("listarUsuarios/", listar_usuarios, name="listar_usuarios"),
+    path("form_crear_usuario/", form_crear_usuario, name="form_crear_usuario"),
     path('salir', LogoutView.as_view(next_page="/ingresar"), name='salir'),
     path("recuperar/", form_recuperar_usuario, name="form_recuperar_usuario"),
     path("buscar/"   , buscar,    name="buscar"),

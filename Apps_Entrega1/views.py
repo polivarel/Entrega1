@@ -1,17 +1,19 @@
-import re
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from random import *
 from django.template import loader
 from Apps_Entrega1.forms import *
 from Apps_Entrega1.models import *
-from django.contrib.auth import authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
 
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate, get_user_model
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+
+
+
+
 
 def index(request):
     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
@@ -21,32 +23,57 @@ def index(request):
     }
     return HttpResponse(template2.render(context, request))
 
-            
+
+
+#============================================================================================================
+#=================== USUARIOS ===============================================================================            
 def form_ingresar_usuario(request):
     if request.method=="POST":
         form=AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             usu=request.POST["username"]
             clave=request.POST["password"]
-
             usuario=authenticate(username=usu, password=clave)
             if usuario is not None:
                 login(request, usuario)
-                return render(request, '00usuario_ingresar.html', {'mensaje':f"{usuario}"})
+                return render(request, 'usuarios/ingresar.html', {'mensaje':f"{usuario}"})
             else:
-                return render(request, "00usuario_ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
+                return render(request, "usuarios/ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
         else:
-            return render(request, "00usuario_ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
-                
+            return render(request, "usuarios/ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
     else:
         form=AuthenticationForm()
-        return render(request, "00usuario_ingresar.html", {"formulario":form})
+        return render(request, "usuarios/crear.html", {"formulario":form})
+
+
+
+def listar_usuarios(request):
+    all_users= get_user_model().objects.all()
+    context= {'allusers': all_users}
+    return render(request, 'usuarios/listar.html', context)
+
+
+
+def form_crear_usuario(request):
+    if request.method == 'POST':
+        form = form_crear_usuario(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            form.save()
+            return render(request, 'usuarios/crear.html', {'mensaje':f" creado: {username} correctamente"})
+        else:
+            return render(request, "usuarios/crear.html", {"formulario":form, "mensaje":"FORMULARIO INVALIDO"})    
+    else:
+        form = form_crear_usuario()
+        return render(request, 'usuarios/crear.html', {'form': form})
 
 
 
 
 
-
+#=================== USUARIOS ===============================================================================            
+#============================================================================================================
 
 
 

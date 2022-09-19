@@ -101,9 +101,23 @@
                 <div  class="menu_hover_item" onclick='irA("/ingresar")'>Ingresar
                 <img src="{% static 'assets/img/icono_entrar.png' %}"     height="50px"></div>
                 {% else %}
-                <a href="{% url 'salir' %}">
-                <div  class="menu_hover_item" >{{ user }}
-                <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"></div></a>
+                    {% if user.is_superuser %}
+                    <a href="{% url 'salir' %}">
+                        <div  class="menu_hover_item" style="color:black; text-decoration:none; margin-right:40px ;">
+                            {{ user }}@admin
+                             <img src="{% static 'assets/img/icono_admin.png' %}"     height="50px">
+                        </div>
+                    </a>
+                    <a href="{% url 'salir' %}">
+                        <div  class="menu_hover_item" style="color:black; text-decoration:none; margin-right:20px ;">
+                            <a href="{% url 'salir' %}"> <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"> 
+                        </div>
+                    </a>
+                    {% else %}
+                        <a href="{% url 'salir' %}">
+                        <div  class="menu_hover_item" style="color:black; text-decoration:none;">{{ user }}@user
+                        <img src="{% static 'assets/img/icono_salir.png' %}"     height="50px"></div></a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

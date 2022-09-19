@@ -1,4 +1,7 @@
+from contextlib import AbstractAsyncContextManager
+from typing import AbstractSet
 from django.db import models
+from django.contrib.auth.models import User
 
 class Peliculas(models.Model):
     fecha_inicio=models.DateField(blank=True,null=True)

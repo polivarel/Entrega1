@@ -1,0 +1,14 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+  <h2>Crear usuario</h2><br>
+  <form action="{% url 'form_crear_usuario' %}" method="POST">{% csrf_token %}
+    <table>
+      {{ formulario.as_table }}
+    </table>
+    <button type="submit">Registrar</button>
+  </form><br>
+  <h2>{{ mensaje }} </h2>  
+{% endblock %}
