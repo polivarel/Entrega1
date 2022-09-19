@@ -19,7 +19,7 @@
     </script>
 {% else %}
   <style>.errorlist{color:red;}</style>
-  <form action="{% url 'form_crear_usuario' %}" method="POST">{% csrf_token %}
+  <form action="{% url 'form_editar_usuarios' %}" method="POST">{% csrf_token %}
     <h2 style="text-align:center;">Editar usuario</h2><br>
     <table>
       {{ formulario.as_table }}

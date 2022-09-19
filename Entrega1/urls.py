@@ -18,7 +18,7 @@ urlpatterns = [
     path("form_crear_usuario/", crear_usuario, name="form_crear_usuario"),
     path('salir', LogoutView.as_view(next_page="/ingresar"), name='salir'),
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
-    path("editar_usuarios/", editar_usuarios, name="form_editar_usuario"),
+    path("editar_usuarios/", editar_usuarios, name="form_editar_usuarios"),
     #linea reservada para Pablo
     #linea reservada para Pablo
     #linea reservada para Pablo

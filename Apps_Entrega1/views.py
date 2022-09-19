@@ -1,11 +1,16 @@
+from pydoc import visiblename
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
 from random import *
 from django.template import loader
 from Apps_Entrega1.forms import *
 from Apps_Entrega1.models import *
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.urls import reverse_lazy    
+
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -68,10 +73,10 @@ def listar_usuarios(request):
 
 
 
-def editar_usuarios(request, id):
-    usuario = User.objects.get(id=id)
+def editar_usuarios(request):
+    usuario = request.user
     if request.method == 'POST':
-        form = form_editar_usuario(request.POST)
+        form = form_editar_usuarios(request.POST)
         if form.is_valid():
             usuario.username   = form.cleaned_data.get('username')
             usuario.password   = form.cleaned_data.get('password1')
@@ -79,10 +84,12 @@ def editar_usuarios(request, id):
             usuario.last_name  = form.cleaned_data.get('last_name')
             usuario.email      = form.cleaned_data.get('email')
             usuario.save()
-            return render(request, 'usuarios/editar.html', {'mensaje':usuario.username})
+            return render(request, 'usuarios/editar.html', {'mensaje':"Editado correctamente"})
+        else:
+            return render(request, "usuarios/editar.html", {"formulario":form, "usuario":usuario, "mensaje":"FORMULARIO INVALIDO"})
     else:
-        form = form_editar_usuario(initial=({'username':usuario.username, 'first_name':usuario.first_name, 'last_name':usuario.last_name, 'email':usuario.email}))
-        return render(request, 'usuarios/editar.html', {'formulario': form, usuario:usuario})
+        form = form_editar_usuarios(instance=usuario)
+        return render(request, 'usuarios/editar.html', {'formulario': form, "usuario":usuario})
     
 
 #=================== USUARIOS ===============================================================================            

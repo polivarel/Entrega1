@@ -17,8 +17,6 @@ from django.db import models
 from django.forms.widgets import Widget
 from django.http.request import HttpRequest
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
 
 
@@ -59,7 +57,7 @@ class form_crear_usuario(UserCreationForm):
         fields = ['first_name','last_name','username', 'email', 'password1', 'password2']
     
 
-class form_editar_usuario(forms.Form):
+class form_editar_usuarios(forms.Form):
     id         = forms.IntegerField(widget=forms.HiddenInput())
     first_name = forms.CharField( label='Nombre'                ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su nombre.'}))
     last_name  = forms.CharField( label='Apellido'              ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su apellido'}))   
