@@ -98,8 +98,8 @@
             </div>
             <div class="menu_salir">
                 {% if not user.is_authenticated %}
-                <div  class="menu_hover_item" onclick='irA("/ingresar")'>Ingresar
-                <img src="{% static 'assets/img/icono_entrar.png' %}"     height="50px"></div>
+                    <div  class="menu_hover_item" onclick='irA("/ingresar")'>Ingresar
+                    <img src="{% static 'assets/img/icono_entrar.png' %}"     height="50px"></div>
                 {% else %}
                     {% if user.is_superuser %}
                     <a href="{% url 'salir' %}">

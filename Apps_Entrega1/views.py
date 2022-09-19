@@ -43,14 +43,7 @@ def form_ingresar_usuario(request):
             return render(request, "usuarios/ingresar.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos"})
     else:
         form=AuthenticationForm()
-        return render(request, "usuarios/crear.html", {"formulario":form})
-
-
-
-def listar_usuarios(request):
-    all_users= get_user_model().objects.all()
-    context= {'allusers': all_users}
-    return render(request, 'usuarios/listar.html', context)
+        return render(request, "usuarios/ingresar.html", {"formulario":form})
 
 
 
@@ -66,7 +59,7 @@ def form_crear_usuario(request):
             return render(request, "usuarios/crear.html", {"formulario":form, "mensaje":"FORMULARIO INVALIDO"})    
     else:
         form = form_crear_usuario()
-        return render(request, 'usuarios/crear.html', {'form': form})
+        return render(request, 'usuarios/crear.html', {'formulario': form})
 
 
 
