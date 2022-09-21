@@ -73,13 +73,12 @@ def listar_usuarios(request):
 
 
 
-def editar_usuarios(request):
-    usuario = request.user
+def editar_usuarios(request,id):
+    usuario = User.objects.get(id=id)
     if request.method == 'POST':
-        form = form_editar_usuarios(request.POST)
+        form = form_editar_usuarios(request.POST,instance=usuario)
         if form.is_valid():
             usuario.username   = form.cleaned_data.get('username')
-            usuario.password   = form.cleaned_data.get('password1')
             usuario.first_name = form.cleaned_data.get('first_name')
             usuario.last_name  = form.cleaned_data.get('last_name')
             usuario.email      = form.cleaned_data.get('email')
@@ -91,6 +90,11 @@ def editar_usuarios(request):
         form = form_editar_usuarios(instance=usuario)
         return render(request, 'usuarios/editar.html', {'formulario': form, "usuario":usuario})
     
+
+def eliminar_usuario(request,id):
+    usuario = User.objects.get(id=id)
+    usuario.delete()
+    return redirect('listar_usuarios')
 
 #=================== USUARIOS ===============================================================================            
 #============================================================================================================

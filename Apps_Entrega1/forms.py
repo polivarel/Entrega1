@@ -43,7 +43,7 @@ class AuthenticationForm(forms.Form):
 class form_recuperar_usuario(forms.Form):
     correo = forms.EmailField()
 
-#@login_required
+@login_required
 class form_crear_usuario(UserCreationForm):
     first_name = forms.CharField( label='Nombre'                ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su nombre.'}))
     last_name  = forms.CharField( label='Apellido'              ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su apellido'}))   
@@ -56,17 +56,37 @@ class form_crear_usuario(UserCreationForm):
         model = User
         fields = ['first_name','last_name','username', 'email', 'password1', 'password2']
     
-
-class form_editar_usuarios(forms.Form):
-    id         = forms.IntegerField(widget=forms.HiddenInput())
-    first_name = forms.CharField( label='Nombre'                ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su nombre.'}))
-    last_name  = forms.CharField( label='Apellido'              ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su apellido'}))   
-    username   = forms.CharField( label='Usuario'               ,max_length=30, required=True , widget=forms.TextInput(attrs= {'title':'Requerido. 30 caracteres o menos. Letras, dígitos y @/./+/-/_ solamente.'}))  
-    email      = forms.EmailField(label='Correo'                ,max_length=254,required=True , widget=forms.EmailInput(attrs={'title':'Requerido. Ingrese una dirección de correo electrónico válida.'}))
-      
+@login_required
+class form_editar_usuarios(forms.ModelForm):
+    first_name = forms.CharField( label='Nombre'   ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su nombre.'}))
+    last_name  = forms.CharField( label='Apellido' ,max_length=30, required=False, widget=forms.TextInput(attrs= {'title':'Escriba su apellido'}))   
+    username   = forms.CharField( label='Usuario'  ,max_length=30, required=True , widget=forms.TextInput(attrs= {'title':'Requerido. 30 caracteres o menos. Letras, dígitos y @/./+/-/_ solamente.'}))  
+    email      = forms.EmailField(label='Correo'   ,max_length=254,required=True , widget=forms.EmailInput(attrs={'title':'Requerido. Ingrese una dirección de correo electrónico válida.'}))
+    
     class Meta:
         model = User
-        fields = ['id','first_name','last_name','username', 'email' ]
+        fields = ['first_name','last_name','username', 'email' ]
+        
+"""     def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exclude(username=self.instance.username).exists():
+            raise forms.ValidationError('El correo ya existe')
+        return email
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if username and User.objects.filter(username=username).exclude(username=self.instance.username).exists():
+            raise forms.ValidationError('El usuario ya existe')
+        return username   """  
+
+
+
+
+class form_eliminar_usuario(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput())
+    username = forms.CharField(label='Usuario', widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    class Meta:
+        model = User
+        fields = ['id','username']
 
 
 #===============================================================================

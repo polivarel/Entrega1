@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import include, path
-from Apps_Entrega1.views import *
+
 from django.contrib.auth.views import LogoutView
+from Apps_Entrega1.views import *
 #linea reservada para Pablo
 #linea reservada para Pablo
 #linea reservada para Pablo
@@ -13,21 +14,24 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/'    , admin.site.urls),
-    path('', index, name='index'),  #al no poner nada, se carga el index.html cuando abres la pagina editar_usuarios
+    path('', index, name='index'),  
+    path("buscar/", buscar, name="buscar"),
+
+
     path("ingresar/", form_ingresar_usuario, name="form_ingresar_usuario"),
     path("form_crear_usuario/", crear_usuario, name="form_crear_usuario"),
     path('salir', LogoutView.as_view(next_page="/ingresar"), name='salir'),
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
-    path("editar_usuarios/", editar_usuarios, name="form_editar_usuarios"),
-    #linea reservada para Pablo
-    #linea reservada para Pablo
-    #linea reservada para Pablo
-    path("buscar/"   , buscar,    name="buscar"),
-    path("teatro/"   , teatro,    name="teatro"),
+    path("editar_usuarios/<int:id>", editar_usuarios, name="form_editar_usuarios"),
+    path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
+    path("eliminar_usuario/<int:id>", eliminar_usuario, name="eliminar_usuario"),
+
     path("deporte/"  , deporte,   name="deporte"),
-    path("peliculasFormulario/", peliculasFormulario, name="peliculasFormulario"),
-    path("teatroFormulario/", teatroFormulario, name="teatroFormulario"),
     path("deporteFormulario/", deporteFormulario, name="deporteFormulario"),
-    path("busquedaPelicula/", busquedaPelicula, name="busquedaPelicula"),
-    path("buscar/", buscar, name="buscar"),
+
+    path("peliculasFormulario/", peliculasFormulario, name="peliculasFormulario"),
+
+    path("teatro/"   , teatro,    name="teatro"),
+    path("teatroFormulario/", teatroFormulario, name="teatroFormulario"),
+
 ]
