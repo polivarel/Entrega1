@@ -17,6 +17,7 @@ urlpatterns = [
     path('', index, name='index'),  
     path("buscar/", buscar, name="buscar"),
 
+    path('App_mensajeria/', include('App_mensajeria.urls')),
 
     path("ingresar/", form_ingresar_usuario, name="form_ingresar_usuario"),
     path("form_crear_usuario/", crear_usuario, name="form_crear_usuario"),
@@ -24,7 +25,7 @@ urlpatterns = [
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
     path("editar_usuarios/<int:id>", editar_usuarios, name="form_editar_usuarios"),
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
-    path("eliminar_usuario/<int:id>", eliminar_usuario, name="eliminar_usuario"),
+    path("eliminar_usuario/<int:id>", eliminar_usuario, name="form_eliminar_usuario"),
 
     path("deporte/"  , deporte,   name="deporte"),
     path("deporteFormulario/", deporteFormulario, name="deporteFormulario"),

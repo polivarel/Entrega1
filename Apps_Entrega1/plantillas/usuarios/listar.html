@@ -18,7 +18,7 @@
             color: white;
         }
     </style>
-        
+
         <input type="button" value="Crear usuario" style="margin: 20px;" onclick="irA('/form_crear_usuario')">
         <table> <tr><th>ID              </th><th>Usuario               </th><th>Nombre                  </th><th>Apellido               </th><th>Correo             </th><th>Editar</th><th>Borrar</th></tr>
             {% for usuario in usuarios %}
@@ -33,8 +33,15 @@
                     <td>{{ usuario.last_name }}</td>
                     <td>{{ usuario.email }}</td>
                     <td><a href="{% url 'form_editar_usuarios' usuario.id %}"><img src="{% static 'assets/img/icono_editar.png' %}"     height="30px"></a></td>
-                    <td><a href="{% url 'form_editar_usuarios' usuario.id %}"><img src="{% static 'assets/img/icono_borrar.png' %}"     height="30px"></a></td>
+                    <td><img onclick="BorrarUsuario( '{{ usuario.username }}','{{ usuario.id }}')" src="{% static 'assets/img/icono_borrar.png' %}"     height="30px"></td>
                 </tr>
+                <script>
+                    function BorrarUsuario(usuario,id){
+                        alertify.confirm('Cuidado', 'Desea borrar al usuario <b>'+ usuario + '</b>',
+                        function(){ irA("/eliminar_usuario/"+id); },
+                        function(){ alertify.error('No paso nada :)')}).set('labels', {ok:'Si, a la verga!', cancel:'Noo!'});
+                    }
+                </script>
             {% endfor %}
         </table>
     {% else %}
@@ -42,4 +49,4 @@
     {% endif %}
     
 
-{% endblock %}
+{% endblock %}   

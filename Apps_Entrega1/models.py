@@ -3,6 +3,7 @@ from typing import AbstractSet
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Peliculas(models.Model):
     fecha_inicio=models.DateField(blank=True,null=True)
     lugar       =models.CharField(max_length=50,blank=True,null=True)
