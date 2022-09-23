@@ -1,0 +1,21 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+{% if mensaje %}
+    
+{% else %}
+  <style>.errorlist{color:red;} #id_mensaje{width: 90% !important;}</style>
+  <form action="{% url 'form_crear_usuario' %}" method="POST">{% csrf_token %}
+    <h2 style="text-align:center;">ENVIAR MENSAJE A <b>{{destino}}</b></h2><br>
+    <div style="display: flex; align-items:center; justify-content:space-around; width: 100% !important;">
+      <div style="width: 100% !important;">{{ formulario_casilla }}</div>
+      <div ><input  type="submit" value="⏎"></div>
+    </div>
+    <br><br>
+    <button type="button" style="width:100%;" onclick="irA('/App_mensajeria/mensajes/')">VOLVER</button><br><br><br>
+    <h2 style="text-align:center; color:red;">{{ mensaje }} </h2>  
+  </form><br>
+{% endif %}  
+{% endblock %}

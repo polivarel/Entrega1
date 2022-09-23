@@ -25,18 +25,19 @@ def verMensajes(request):
     return render(request, "mensajes/listar.html", {"usuarios":usuarios})
 
 def mensajeA(request,id):
+    destino = User.objects.get(id=id)
     if request.method == 'POST':
         form = Form_mensajeAa(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             form.save()
-            return render(request, 'mensajes/casilla.html', {'mensaje':username})
+            return render(request, 'mensajes/enviar.html', {'mensaje':username})
         else:
-            return render(request, "mensajes/casilla.html", {"formulario_casilla":form})    
+            return render(request, "mensajes/enviar.html", {"formulario_casilla":form})    
     else:
         form = Form_mensajeAa()
-        return render(request, 'mensajes/casilla.html', {'formulario_casilla': form})
+        return render(request, 'mensajes/enviar.html', {'formulario_casilla': form,"destino":destino})
 
 
     #usuarios = User.objects.all()

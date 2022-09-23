@@ -53,7 +53,7 @@ class form_verMensajes(forms.ModelForm):
 
 
 class Form_mensajeAa(forms.ModelForm):
-    mensaje = forms.CharField(label='Mensaje')
+    mensaje = forms.CharField(label='')
     class Meta:
         model = User
         fields = ['mensaje']
