@@ -36,3 +36,12 @@ class Deporte(models.Model):
 
     def __str__(self):
         return self.titulo+" - "+self.lugar
+
+class Evento(models.Model):
+    propietario=models.CharField(max_length=100,blank=True,null=True)
+    titulo=models.CharField(max_length=50,blank=True,null=True)
+    subtitulo=models.CharField(max_length=100,blank=True,null=True)
+    cuerpo=models.TextField()
+    autor=models.CharField(max_length=100,blank=True,null=True)
+    fecha=models.DateField()
+    imagen=models.ImageField()
