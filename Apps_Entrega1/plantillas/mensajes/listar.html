@@ -20,7 +20,7 @@
     </style>
 
         
-        <table> 
+        <table> AA:{{ request.session.logeado }}
             {% for usuario in usuarios %}
                 {% if usuario.username != user.username %}
                     <tr>

@@ -108,8 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-mx'
 
-TIME_ZONE = 'UTC'
-
+#TIME_ZONE = 'UTC-3'
+TIME_ZONE = "America/Montevideo"
+DATETIME_FORMAT =  ['%d %B, %Y']
+DATETIME_INPUT_FORMATS = ['%m/%d/%y %H:%M']
 USE_I18N = True
 
 USE_TZ = True

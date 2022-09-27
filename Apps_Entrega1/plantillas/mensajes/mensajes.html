@@ -1,0 +1,15 @@
+{% extends "_padre.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+<table> 
+    {% for mensaje in mensajes %}
+       
+            <tr>
+                <td>{{ mensaje.id }} ( {{ mensaje.mensaje }}  )</td>
+            </tr>
+        
+    {% endfor %}
+</table>
+{% endblock %}

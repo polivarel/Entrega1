@@ -3,19 +3,51 @@
 {% load static %}
 
 {% block cuerpo %}
-{% if mensaje %}
-    
-{% else %}
-  <style>.errorlist{color:red;} #id_mensaje{width: 90% !important;}</style>
-  <form action="{% url 'form_crear_usuario' %}" method="POST">{% csrf_token %}
-    <h2 style="text-align:center;">ENVIAR MENSAJE A <b>{{destino}}</b></h2><br>
-    <div style="display: flex; align-items:center; justify-content:space-around; width: 100% !important;">
-      <div style="width: 100% !important;">{{ formulario_casilla }}</div>
-      <div ><input  type="submit" value="⏎"></div>
-    </div>
-    <br><br>
-    <button type="button" style="width:100%;" onclick="irA('/App_mensajeria/mensajes/')">VOLVER</button><br><br><br>
+  {% if mensaje %}
     <h2 style="text-align:center; color:red;">{{ mensaje }} </h2>  
-  </form><br>
-{% endif %}  
+  {% else %}
+    {% if request.session.logeado %}
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    
+    <style>.errorlist{color:red;} #id_mensaje{width: 90% !important;}
+    #div_mensajes{ 
+      max-height: 400px !important; 
+      width: 600px;
+      position: relative;
+      -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(black));
+      -webkit-mask-image: linear-gradient(to top, black 90%, transparent 100%);
+      mask-image: -webkit-gradient(linear, left top, left bottom, from(black), to(transparent));
+      mask-image: linear-gradient(to top, black 90%, transparent 100%);
+  }
+    </style>
+    <p style="text-align:center;">Mensajeando con  <b>{{destino}}</b></p>
+       <div style=" max-height: 400px !important; overflow: scroll; border-bottom: 1px dotted grey;" id="div_mensajes">
+
+       </div>
+     <form action="{% url 'Form_mensajeA' id_destino %}" method="POST" style="width: 600px;">{% csrf_token %}
+     <div style="display: flex; align-items:center; justify-content:space-around; width: 100% !important;">
+       <div style="width: 100% !important;">{{ formulario_casilla }}</div>
+       <div ><input  type="submit" value="⏎"></div>
+     </div>
+     <br><br>
+     <button type="button" style="width:100%;" onclick="irA('/App_mensajeria/mensajes/')">VOLVER</button><br><br><br>
+      
+    </form><br>
+    <script>
+      $(document).ready(function(){
+        setInterval(function(){
+          $("#div_mensajes").load("../contenido/{{id_destino}}");
+        }, 1000);
+      }); 
+      $('#div_mensajes').scrollTop($('#div_mensajes').height());
+      $("#id_mensaje").focus();
+    </script>    
+    {% else %}
+      <p>No se inicio sesión</p>
+    {% endif %} 
+  {% endif %}  
+
+
+
+
 {% endblock %}

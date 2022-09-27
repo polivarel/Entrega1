@@ -20,6 +20,8 @@ urlpatterns = [
     
     path("mensajes/", verMensajes , name="verMensajes"),
     path("mensajeA/<int:id>", mensajeA , name="Form_mensajeA"),
+    path("casilla/", verCasilla , name="Form_casilla"),
+    path("contenido/<int:id>", contenido , name="contenido"),
 
 
 

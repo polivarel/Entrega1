@@ -1,0 +1,12 @@
+{% for mensaje in mensajes %}
+            {% if request.session.logeado == mensaje.propietario %} 
+             <div style="width:400px; margin-left:  60px; background:#95D5AF; border:2px solid grey; margin-bottom: 5px; padding: 3px;-webkit-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px;">{{mensaje.mensaje}} <div style="font-size:10px; color:grey; text-align:right; width: 100%; border-top:1px solid grey;">{{mensaje.fecha}}  {{hora}}</div></div>
+            {% else %}
+             <div style="width:400px; margin-right: 60px; background:#90D3F7; border:2px solid grey; margin-bottom: 5px; padding: 3px;-webkit-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px;">{{mensaje.mensaje}} <div style="font-size:10px; color:grey; text-align:right; width: 100%; border-top:1px solid grey;">{{mensaje.fecha}}  {{hora}}</div></div>
+            {% endif %}
+{% endfor %}
+<script>
+
+    $('#div_mensajes').scrollTop($('#div_mensajes').height());
+
+</script>

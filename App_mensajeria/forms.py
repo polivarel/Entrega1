@@ -2,6 +2,7 @@ from logging import PlaceHolder
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import Form, HiddenInput, CharField, ChoiceField, ModelForm
 
 from typing import Any, Dict, Iterable, List, Optional, Type, TypeVar, Union
 from unittest.util import _MAX_LENGTH
@@ -16,7 +17,7 @@ from django.db import models
 #from django.forms.fields import _ClassLevelWidgetT
 from django.forms.widgets import Widget
 from django.http.request import HttpRequest
-
+#from App_mensajeria import mensajes_db
 
 
 
@@ -52,14 +53,22 @@ class form_verMensajes(forms.ModelForm):
         return username   """  
 
 
-class Form_mensajeAa(forms.ModelForm):
-    mensaje = forms.CharField(label='')
-    class Meta:
-        model = User
-        fields = ['mensaje']
+class Form_mensajeAa(forms.Form):
+    mensaje     = forms.CharField(label='')
+    propietario = forms.HiddenInput()
+    receptor    = forms.HiddenInput()
 
+    #class Meta:
+    #    model = forms
+    #    fields = ['mensaje','propietario']
 
-
+class Form_casilla(forms.Form):
+    id          = forms.CharField()
+    propietario = forms.CharField()
+    receptor    = forms.CharField()
+    mensaje     = forms.CharField()
+    fecha       = forms.DateTimeField()
+    hora        = forms.TimeField()
 #===============================================================================
 #=========================== FORMULARIOS DEL USUARIO ===========================
 
@@ -76,20 +85,3 @@ class Form_mensajeAa(forms.ModelForm):
 
 
 
-class PeliForm(forms.Form):
-    fecha_inicio = forms.DateField(initial=datetime.date.today, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-    lugar        = forms.CharField(max_length=50)
-    titulo       = forms.CharField(max_length=180)
-    hora_inicio  = forms.TimeField( widget=forms.widgets.DateInput(attrs={'type': 'time'}))
-    edad_minima  = forms.DecimalField(min_value=1)
-    puntaje      = forms.DecimalField(min_value=1,max_value=100)
-
-
-
-class TeatroForm(forms.Form):
-    titulo = forms.CharField(max_length=180)
-    lugar  = forms.CharField(max_length=50)
-
-class DeporteForm(forms.Form):
-    titulo = forms.CharField(max_length=180)
-    lugar  = forms.CharField(max_length=50)
