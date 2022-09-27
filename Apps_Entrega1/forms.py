@@ -21,6 +21,7 @@ from django.http.request import HttpRequest
 
 
 
+
 UserModel: Type[AbstractBaseUser]
 _User = TypeVar("_User", bound=AbstractBaseUser)
 
@@ -122,3 +123,13 @@ class TeatroForm(forms.Form):
 class DeporteForm(forms.Form):
     titulo = forms.CharField(max_length=180)
     lugar  = forms.CharField(max_length=50)
+
+
+class EventoForm(forms.Form):
+    propietario=models.CharField(max_length=100,blank=True,null=True)
+    titulo=models.CharField(max_length=50,blank=True,null=True)
+    subtitulo=models.CharField(max_length=100,blank=True,null=True)
+    cuerpo=models.TextField()
+    autor=models.CharField(max_length=100,blank=True,null=True)
+    fecha=models.DateField()
+    imagen=models.ImageField()

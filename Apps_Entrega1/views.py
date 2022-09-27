@@ -120,23 +120,24 @@ def teatro(request):
     }
     return HttpResponse(template1.render(context, request))
 
-def peliculasFormulario(request):
+def eventoFormulario(request):
     if request.method=="POST":
-        form=PeliForm(request.POST)
+        form=EventoForm(request.POST)
         if form.is_valid():
             informacion=form.cleaned_data
-            fecha_inicio=informacion["fecha_inicio"]
-            lugar=informacion["lugar"]
+            propietario=informacion["propietario"]
             titulo=informacion["titulo"]
-            hora_inicio=informacion["hora_inicio"]
-            edad_minima=informacion["edad_minima"]
-            puntaje=informacion["puntaje"]
-            pelicula=Peliculas(fecha_inicio=fecha_inicio,lugar=lugar,titulo=titulo, hora_inicio=hora_inicio,edad_minima=edad_minima,puntaje=puntaje)
-            pelicula.save()
+            subtitulo=informacion["subtitulo"]
+            cuerpo=informacion["cuerpo"]
+            autor=informacion["autor"]
+            fecha=informacion["fecha"]
+            imagen=informacion["imagen"]
+            evento=Evento(propietario=propietario,titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor, fecha=fecha, imagen=imagen)
+            evento.save()
             return render (request, "index.html")
     else:
-        formulario=PeliForm()
-        return render (request, "peliculasFormulario.html", {"formulario":formulario})
+        formulario=EventoForm()
+        return render (request, "eventoFormulario.html", {"formulario":formulario})
 
 def teatroFormulario(request):
     if request.method=="POST":

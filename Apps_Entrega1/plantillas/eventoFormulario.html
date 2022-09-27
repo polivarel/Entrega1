@@ -1,0 +1,17 @@
+{% extends "padrePosta.html" %} 
+
+{% load static %}
+
+{% block cuerpo %}
+
+<!--div class="masthead-subheading">Creacion de nueva entrada</div-->
+
+<form action="{% url 'eventoFormulario' %}" method="POST"> {% csrf_token %}
+
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+
+{% endblock %} 

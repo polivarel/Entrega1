@@ -30,7 +30,7 @@ urlpatterns = [
     path("deporte/"  , deporte,   name="deporte"),
     path("deporteFormulario/", deporteFormulario, name="deporteFormulario"),
 
-    path("peliculasFormulario/", peliculasFormulario, name="peliculasFormulario"),
+    path("eventoFormulario/", eventoFormulario, name="eventoFormulario"),
 
     path("teatro/"   , teatro,    name="teatro"),
     path("teatroFormulario/", teatroFormulario, name="teatroFormulario"),
