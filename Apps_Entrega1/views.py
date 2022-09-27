@@ -13,7 +13,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
 
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 
@@ -103,24 +102,24 @@ def eliminar_usuario(request,id):
 
 
 
-def deporte(request):
-    mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-    template2 = loader.get_template('deporte.html')
-    context = {
-    'mymembers': mymembers,
-    }
-    return HttpResponse(template2.render(context, request))
+# def deporte(request):
+#     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
+#     template2 = loader.get_template('deporte.html')
+#     context = {
+#     'mymembers': mymembers,
+#     }
+#     return HttpResponse(template2.render(context, request))
 
 
-def teatro(request):
-    mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-    template1 = loader.get_template('teatro.html')
-    context = {
-    'mymembers': mymembers,
-    }
-    return HttpResponse(template1.render(context, request))
+# def teatro(request):
+#     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
+#     template1 = loader.get_template('teatro.html')
+#     context = {
+#     'mymembers': mymembers,
+#     }
+#     return HttpResponse(template1.render(context, request))
 
-def eventoFormulario(request):
+def evento(request):
     if request.method=="POST":
         form=EventoForm(request.POST)
         if form.is_valid():
@@ -132,48 +131,48 @@ def eventoFormulario(request):
             autor=informacion["autor"]
             fecha=informacion["fecha"]
             imagen=informacion["imagen"]
-            evento=Evento(propietario=propietario,titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor, fecha=fecha, imagen=imagen)
+            evento=Evento_db(propietario=propietario,titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor, fecha=fecha, imagen=imagen)
             evento.save()
             return render (request, "index.html")
     else:
         formulario=EventoForm()
-        return render (request, "eventoFormulario.html", {"formulario":formulario})
+        return render (request, "eventoFormulario.html", {"formulario_evento":formulario})
 
-def teatroFormulario(request):
-    if request.method=="POST":
-        form=TeatroForm(request.POST)
-        if form.is_valid():
-            informacion=form.cleaned_data
-            titulo=informacion["titulo"]
-            lugar=informacion["lugar"]
-            obra=Teatro(titulo=titulo, lugar=lugar)
-            obra.save()
-            return render (request, "index.html")
-    else:
-        formulario=TeatroForm()
-        return render (request, "teatroFormulario.html", {"formulario":formulario})
+# def teatroFormulario(request):
+#     if request.method=="POST":
+#         form=TeatroForm(request.POST)
+#         if form.is_valid():
+#             informacion=form.cleaned_data
+#             titulo=informacion["titulo"]
+#             lugar=informacion["lugar"]
+#             obra=Teatro(titulo=titulo, lugar=lugar)
+#             obra.save()
+#             return render (request, "index.html")
+#     else:
+#         formulario=TeatroForm()
+#         return render (request, "teatroFormulario.html", {"formulario":formulario})
 
-def deporteFormulario(request):
-    if request.method=="POST":
-        form=DeporteForm(request.POST)
-        if form.is_valid():
-            informacion=form.cleaned_data
-            titulo=informacion["titulo"]
-            lugar=informacion["lugar"]
-            partido=Deporte(titulo=titulo, lugar=lugar)
-            partido.save()
-            return render (request, "index.html")
-    else:
-        formulario=DeporteForm()
-        return render (request, "deporteFormulario.html", {"formulario":formulario})
+# def deporteFormulario(request):
+#     if request.method=="POST":
+#         form=DeporteForm(request.POST)
+#         if form.is_valid():
+#             informacion=form.cleaned_data
+#             titulo=informacion["titulo"]
+#             lugar=informacion["lugar"]
+#             partido=Deporte(titulo=titulo, lugar=lugar)
+#             partido.save()
+#             return render (request, "index.html")
+#     else:
+#         formulario=DeporteForm()
+#         return render (request, "deporteFormulario.html", {"formulario":formulario})
 
-def busquedaPelicula(request):
-    return render(request, "busquedaPelicula.html")
+# def busquedaPelicula(request):
+#     return render(request, "busquedaPelicula.html")
 
-def buscar(request):
-    if request.GET["titulo"]:
-        titulo=request.GET["titulo"]
-        peliculas=Peliculas.objects.filter(titulo=titulo)
-        return render(request, "resultadosBusqueda.html", {"peliculas":peliculas})
-    else:
-        return render(request, "busquedaPelicula.html", {"mensaje":"Ingrese una pelicula"})
+# def buscar(request):
+#     if request.GET["titulo"]:
+#         titulo=request.GET["titulo"]
+#         peliculas=Peliculas.objects.filter(titulo=titulo)
+#         return render(request, "resultadosBusqueda.html", {"peliculas":peliculas})
+#     else:
+#         return render(request, "busquedaPelicula.html", {"mensaje":"Ingrese una pelicula"})

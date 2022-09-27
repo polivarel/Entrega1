@@ -15,8 +15,6 @@ from App_mensajeria.views import *
 
 
 urlpatterns = [
-    path('admin/'    , admin.site.urls),
-    path('', index, name='index'),  
     
     path("mensajes/", verMensajes , name="verMensajes"),
     path("mensajeA/<int:id>", mensajeA , name="Form_mensajeA"),

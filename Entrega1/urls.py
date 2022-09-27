@@ -15,7 +15,7 @@ from Apps_Entrega1.views import *
 urlpatterns = [
     path('admin/'    , admin.site.urls),
     path('', index, name='index'),  
-    path("buscar/", buscar, name="buscar"),
+    # path("buscar/", buscar, name="buscar"),
 
     path('App_mensajeria/', include('App_mensajeria.urls')),
 
@@ -27,12 +27,10 @@ urlpatterns = [
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
     path("eliminar_usuario/<int:id>", eliminar_usuario, name="form_eliminar_usuario"),
 
-    path("deporte/"  , deporte,   name="deporte"),
-    path("deporteFormulario/", deporteFormulario, name="deporteFormulario"),
 
-    path("eventoFormulario/", eventoFormulario, name="eventoFormulario"),
 
-    path("teatro/"   , teatro,    name="teatro"),
-    path("teatroFormulario/", teatroFormulario, name="teatroFormulario"),
+    path("eventoFormulario/", evento, name="evento_Formulario"),
+
+
 
 ]

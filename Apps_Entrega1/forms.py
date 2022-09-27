@@ -95,41 +95,12 @@ class form_eliminar_usuario(forms.ModelForm):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-class PeliForm(forms.Form):
-    fecha_inicio = forms.DateField(initial=datetime.date.today, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-    lugar        = forms.CharField(max_length=50)
-    titulo       = forms.CharField(max_length=180)
-    hora_inicio  = forms.TimeField( widget=forms.widgets.DateInput(attrs={'type': 'time'}))
-    edad_minima  = forms.DecimalField(min_value=1)
-    puntaje      = forms.DecimalField(min_value=1,max_value=100)
-
-
-
-class TeatroForm(forms.Form):
-    titulo = forms.CharField(max_length=180)
-    lugar  = forms.CharField(max_length=50)
-
-class DeporteForm(forms.Form):
-    titulo = forms.CharField(max_length=180)
-    lugar  = forms.CharField(max_length=50)
-
-
 class EventoForm(forms.Form):
-    propietario=models.CharField(max_length=100,blank=True,null=True)
-    titulo=models.CharField(max_length=50,blank=True,null=True)
-    subtitulo=models.CharField(max_length=100,blank=True,null=True)
-    cuerpo=models.TextField()
-    autor=models.CharField(max_length=100,blank=True,null=True)
-    fecha=models.DateField()
-    imagen=models.ImageField()
+    propietario=forms.CharField()
+    titulo=forms.CharField()
+    subtitulo=forms.CharField()
+    cuerpo=forms.Textarea()
+    autor=forms.CharField()
+    fecha=forms.DateField()
+    imagen=forms.ImageField()
+    
