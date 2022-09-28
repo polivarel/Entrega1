@@ -20,12 +20,13 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-    template2 = loader.get_template('index.html')
-    context = {
-    'mymembers': mymembers,
-    }
-    return HttpResponse(template2.render(context, request))
+    return render (request, "index.html")
+    #mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
+    #template2 = loader.get_template('index.html')
+    #context = {
+    #'mymembers': mymembers,
+    #}
+    #return HttpResponse(template2.render(context, request))
 
 
 
@@ -135,8 +136,8 @@ def evento(request):
             evento.save()
             return render (request, "index.html")
     else:
-        formulario=EventoForm()
-        return render (request, "eventoFormulario.html", {"formulario_evento":formulario})
+        form=EventoForm()
+        return render (request, "eventoFormulario.html", {"formulario_evento":form})
 
 # def teatroFormulario(request):
 #     if request.method=="POST":

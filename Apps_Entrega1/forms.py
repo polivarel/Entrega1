@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from typing import Any, Dict, Iterable, List, Optional, Type, TypeVar, Union
 from unittest.util import _MAX_LENGTH
 
-import datetime
+from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -99,7 +99,7 @@ class EventoForm(forms.Form):
     propietario=forms.CharField()
     titulo=forms.CharField()
     subtitulo=forms.CharField()
-    cuerpo=forms.Textarea()
+    cuerpo=forms.CharField(widget=forms.Textarea)
     autor=forms.CharField()
     fecha=forms.DateField()
     imagen=forms.ImageField()
