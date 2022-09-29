@@ -50,7 +50,6 @@ def form_ingresar_usuario(request):
         return render(request, "usuarios/ingresar.html", {"formulario":form})
 
 
-
 def crear_usuario(request):
     if request.method == 'POST':
         form = form_crear_usuario(request.POST)
@@ -58,7 +57,7 @@ def crear_usuario(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             form.save()
-            return render(request, 'usuarios/crear.html', {'mensaje':username})
+            return render(request, 'index.html', {'mensaje':username})
         else:
             return render(request, "usuarios/crear.html", {"formulario":form})    
     else:
