@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from typing import Any, Dict, Iterable, List, Optional, Type, TypeVar, Union
 from unittest.util import _MAX_LENGTH
 
-import datetime
+from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -16,9 +16,9 @@ from django.db import models
 #from django.forms.fields import _ClassLevelWidgetT
 from django.forms.widgets import Widget
 from django.http.request import HttpRequest
-
-
-
+from .models import Evento_db 
+import datetime
+from django.utils import timezone
 
 
 
@@ -95,12 +95,15 @@ class form_eliminar_usuario(forms.ModelForm):
 
 
 
-class EventoForm(forms.Form):
-    propietario=forms.CharField()
-    titulo=forms.CharField()
-    subtitulo=forms.CharField()
-    cuerpo=forms.Textarea()
-    autor=forms.CharField()
-    fecha=forms.DateField()
-    imagen=forms.ImageField()
+class EventoForm(forms.ModelForm):
+    propietario=forms.CharField(max_length=100)
+    titulo     =forms.CharField(max_length=100)
+    subtitulo  =forms.CharField()
+    cuerpo     =forms.CharField(widget=forms.Textarea)
+    autor      =forms.CharField(max_length=100)
+    fecha      =forms.DateField(widget=forms.SelectDateWidget, initial=timezone.now())
+    imagen     =forms.ImageField()
     
+    class Meta:
+        model = Evento_db
+        fields = ('propietario', 'titulo', 'subtitulo', 'cuerpo', 'autor','fecha','imagen')
