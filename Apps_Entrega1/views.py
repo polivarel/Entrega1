@@ -2,21 +2,16 @@ from email.mime import image
 from pydoc import visiblename
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
 from random import *
 from django.template import RequestContext , loader
 from Apps_Entrega1.forms import *
 from Apps_Entrega1.models import *
-
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy    
-
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
-
 from django.contrib.auth.decorators import login_required
-
-
+from django.contrib.auth.models import User
 
 
 
@@ -95,6 +90,17 @@ def eliminar_usuario(request,id):
     usuario = User.objects.get(id=id)
     usuario.delete()
     return redirect('listar_usuarios')
+
+@login_required
+def ver_perfil(request, username= None):
+    current_user = request.user
+    if username and username != current_user.username:
+        user = User.objects.get(username=username)
+    else:
+        user = current_user
+        return render (request, "usuarios/perfil.html", {"user":user})
+
+
 
 #=================== USUARIOS ===============================================================================            
 #============================================================================================================
