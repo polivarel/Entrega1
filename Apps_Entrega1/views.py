@@ -1,9 +1,10 @@
+from email.mime import image
 from pydoc import visiblename
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from random import *
-from django.template import loader
+from django.template import RequestContext , loader
 from Apps_Entrega1.forms import *
 from Apps_Entrega1.models import *
 
@@ -51,7 +52,6 @@ def form_ingresar_usuario(request):
         return render(request, "usuarios/ingresar.html", {"formulario":form})
 
 
-
 def crear_usuario(request):
     if request.method == 'POST':
         form = form_crear_usuario(request.POST)
@@ -59,7 +59,7 @@ def crear_usuario(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             form.save()
-            return render(request, 'usuarios/crear.html', {'mensaje':username})
+            return render(request, 'index.html', {'mensaje':username})
         else:
             return render(request, "usuarios/crear.html", {"formulario":form})    
     else:
@@ -102,78 +102,55 @@ def eliminar_usuario(request,id):
 
 
 
-
-# def deporte(request):
-#     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-#     template2 = loader.get_template('deporte.html')
-#     context = {
-#     'mymembers': mymembers,
-#     }
-#     return HttpResponse(template2.render(context, request))
-
-
-# def teatro(request):
-#     mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
-#     template1 = loader.get_template('teatro.html')
-#     context = {
-#     'mymembers': mymembers,
-#     }
-#     return HttpResponse(template1.render(context, request))
+#=================== EVENTOS ===============================================================================
 
 def evento(request):
     if request.method=="POST":
-        form=EventoForm(request.POST)
+        form=EventoForm(request.POST, request.FILES)
         if form.is_valid():
             informacion=form.cleaned_data
-            propietario=informacion["propietario"]
-            titulo=informacion["titulo"]
-            subtitulo=informacion["subtitulo"]
-            cuerpo=informacion["cuerpo"]
-            autor=informacion["autor"]
-            fecha=informacion["fecha"]
-            imagen=informacion["imagen"]
-            evento=Evento_db(propietario=propietario,titulo=titulo,subtitulo=subtitulo,cuerpo=cuerpo,autor=autor, fecha=fecha, imagen=imagen)
+            propietario=informacion['propietario']
+            titulo=informacion['titulo']
+            subtitulo=informacion['subtitulo']
+            cuerpo=informacion['cuerpo']
+            autor=informacion['autor']
+            fecha=informacion['fecha']
+            imagen=informacion['imagen']
+            evento=Evento_db(propietario=propietario, titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, fecha=fecha, imagen=imagen)
             evento.save()
-            return render (request, "index.html")
+            return render(request, "eventoFormulario.html",{"mensaje":"Evento creado correctamente"})
+        else:
+            return render(request, "eventoFormulario.html",{"mensaje":"Formulario invalido"})
     else:
         form=EventoForm()
-        return render (request, "eventoFormulario.html", {"formulario_evento":form})
+        return render(request, "eventoFormulario.html", {"formulario_evento":form})
 
-# def teatroFormulario(request):
-#     if request.method=="POST":
-#         form=TeatroForm(request.POST)
-#         if form.is_valid():
-#             informacion=form.cleaned_data
-#             titulo=informacion["titulo"]
-#             lugar=informacion["lugar"]
-#             obra=Teatro(titulo=titulo, lugar=lugar)
-#             obra.save()
-#             return render (request, "index.html")
-#     else:
-#         formulario=TeatroForm()
-#         return render (request, "teatroFormulario.html", {"formulario":formulario})
+def leerEventos(request):
+    eventos=Evento_db.objects.all()
+    return render(request, "leerEventos.html", {"eventos": eventos})
 
-# def deporteFormulario(request):
-#     if request.method=="POST":
-#         form=DeporteForm(request.POST)
-#         if form.is_valid():
-#             informacion=form.cleaned_data
-#             titulo=informacion["titulo"]
-#             lugar=informacion["lugar"]
-#             partido=Deporte(titulo=titulo, lugar=lugar)
-#             partido.save()
-#             return render (request, "index.html")
-#     else:
-#         formulario=DeporteForm()
-#         return render (request, "deporteFormulario.html", {"formulario":formulario})
+def eliminarEvento(request, id):
+    evento=Evento_db.objects.get(id=id)
+    evento.delete()
+    eventos=Evento_db.objects.all()
+    return render(request, "leerEventos.html", {"eventos": eventos})
 
-# def busquedaPelicula(request):
-#     return render(request, "busquedaPelicula.html")
-
-# def buscar(request):
-#     if request.GET["titulo"]:
-#         titulo=request.GET["titulo"]
-#         peliculas=Peliculas.objects.filter(titulo=titulo)
-#         return render(request, "resultadosBusqueda.html", {"peliculas":peliculas})
-#     else:
-#         return render(request, "busquedaPelicula.html", {"mensaje":"Ingrese una pelicula"})
+def editarEvento(request, id):
+    evento=Evento_db.objects.get(id=id)
+    if request.method=="POST":
+        form=EventoForm(request.POST, request.FILE)
+        if form.is_valid():
+            info=form.cleaned_data
+            evento.propietario=info["propietario"]
+            evento.titulo=info["titulo"]
+            evento.subtitulo=info["subtitulo"]
+            evento.cuerpo=info["cuerpo"]
+            evento.autor=info["autor"]
+            evento.fecha=info["fecha"]
+            evento.imagen=info["imagen"]
+            evento.save()
+            eventos=Evento_db.objects.all()
+            return render(request, "leerEventos.html", {"eventos":eventos})
+        else:
+            form=EventoForm(initial={"propietario":evento.propietario, "titulo":evento.titulo, "subtitulo":evento.subtitulo, "cuerpo":evento.cuerpo, "autor":evento.autor, "fecha":evento.fecha, "imagen":evento.imagen})
+            return render(request, "editarEvento.html", {"formulario":form, "evento":evento})

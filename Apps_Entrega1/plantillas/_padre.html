@@ -113,6 +113,7 @@
             </div>
             <div class="menu_salir">
                 {% if not user.is_authenticated %}
+                    <a href="{% url 'form_crear_usuario' %}"></a>
                     <div  class="menu_hover_item" onclick='irA("/ingresar")'>Ingresar
                     <img src="{% static 'assets/img/icono_entrar.png' %}"     height="50px"></div>
                 {% else %}

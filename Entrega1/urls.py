@@ -3,6 +3,9 @@ from django.urls import include, path
 
 from django.contrib.auth.views import LogoutView
 from Apps_Entrega1.views import *
+
+from django.conf import settings #add this
+from django.conf.urls.static import static #add this
 #linea reservada para Pablo
 #linea reservada para Pablo
 #linea reservada para Pablo
@@ -21,7 +24,7 @@ urlpatterns = [
 
     path("ingresar/", form_ingresar_usuario, name="form_ingresar_usuario"),
     path("form_crear_usuario/", crear_usuario, name="form_crear_usuario"),
-    path('salir', LogoutView.as_view(next_page="/ingresar"), name='salir'),
+    path('salir', LogoutView.as_view(next_page="/"), name='salir'),
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
     path("editar_usuarios/<int:id>", editar_usuarios, name="form_editar_usuarios"),
     path("listar_usuarios/", listar_usuarios, name="listar_usuarios"),
@@ -30,7 +33,10 @@ urlpatterns = [
 
 
     path("eventoFormulario/", evento, name="evento_Formulario"),
-
-
-
+    path("leerEventos/", leerEventos, name="leerEventos"),
+    path("eliminarEvento/<id>", eliminarEvento, name="eliminarEvento"),
+    path("editarEvento/<id>", editarEvento, name="editarEvento"),
 ]
+
+if settings.DEBUG: #add this
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
