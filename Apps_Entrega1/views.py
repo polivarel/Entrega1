@@ -154,3 +154,6 @@ def editarEvento(request, id):
         else:
             form=EventoForm(initial={"propietario":evento.propietario, "titulo":evento.titulo, "subtitulo":evento.subtitulo, "cuerpo":evento.cuerpo, "autor":evento.autor, "fecha":evento.fecha, "imagen":evento.imagen})
             return render(request, "editarEvento.html", {"formulario":form, "evento":evento})
+
+
+
