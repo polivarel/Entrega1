@@ -38,6 +38,7 @@ urlpatterns = [
     path("leerEventos/", leerEventos, name="leerEventos"),
     path("eliminarEvento/<id>", eliminarEvento, name="eliminarEvento"),
     path("editarEvento/<id>", editarEvento, name="editarEvento"),
+    path("leerMas/<id>", leerMas, name="leerMas"),
 ]
 
 if settings.DEBUG: #add this

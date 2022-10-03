@@ -160,6 +160,12 @@ def editarEvento(request, id):
         else:
             form=EventoForm(initial={"propietario":evento.propietario, "titulo":evento.titulo, "subtitulo":evento.subtitulo, "cuerpo":evento.cuerpo, "autor":evento.autor, "fecha":evento.fecha, "imagen":evento.imagen})
             return render(request, "editarEvento.html", {"formulario":form, "evento":evento})
+    else:
+        form=EventoForm()
+        return render(request, "eventoFormulario.html", {"formulario":form})
 
 
+def leerMas(request, id):
+    evento=Evento_db.objects.get(id=id)
+    return render(request, "leerMas.html", {"evento":evento})
 
