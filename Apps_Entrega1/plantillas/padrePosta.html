@@ -25,16 +25,17 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Sobre Nosotros</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Eventos</a>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Sobre Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'leerEventos' %}">Eventos</a></li>
+                        <!-- Desplegable de Eventos  <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="{% url 'leerEventos' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">Eventos</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">Cine</a></li>
                                 <li><a class="dropdown-item" href="#!">Teatro</a></li>
                                 <li><a class="dropdown-item" href="#!">Deportes</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                     <ul>
                     {% if user.is_authenticated %}

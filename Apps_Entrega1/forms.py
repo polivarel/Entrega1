@@ -19,6 +19,7 @@ from django.http.request import HttpRequest
 from .models import Evento_db 
 import datetime
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 
 
@@ -99,7 +100,7 @@ class EventoForm(forms.ModelForm):
     propietario=forms.CharField(max_length=100)
     titulo     =forms.CharField(max_length=100)
     subtitulo  =forms.CharField()
-    cuerpo     =forms.CharField(widget=forms.Textarea)
+    cuerpo     =RichTextField(verbose_name="Contenido")
     autor      =forms.CharField(max_length=100)
     fecha      =forms.DateField(widget=forms.SelectDateWidget, initial=timezone.now())
     imagen     =forms.ImageField()

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Apps_Entrega1',
     'App_mensajeria',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

@@ -35,10 +35,11 @@ urlpatterns = [
 
 
     path("eventoFormulario/", evento, name="evento_Formulario"),
-    path("leerEventos/", leerEventos, name="leerEventos"),
+    path("pages/", leerEventos, name="leerEventos"),
     path("eliminarEvento/<id>", eliminarEvento, name="eliminarEvento"),
     path("editarEvento/<id>", editarEvento, name="editarEvento"),
-    path("leerMas/<id>", leerMas, name="leerMas"),
+    path("pages/<id>", leerMas, name="leerMas"),
+    path("about/", about, name="about"),
 ]
 
 if settings.DEBUG: #add this

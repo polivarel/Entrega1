@@ -169,3 +169,5 @@ def leerMas(request, id):
     evento=Evento_db.objects.get(id=id)
     return render(request, "leerMas.html", {"evento":evento})
 
+def about(request):
+    return render(request, "about.html")
