@@ -19,6 +19,7 @@ from django.http.request import HttpRequest
 from .models import Evento_db 
 import datetime
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 
 
@@ -68,16 +69,16 @@ class form_editar_usuarios(forms.ModelForm):
         model = User
         fields = ['first_name','last_name','username', 'email' ]
 
-"""     def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if email and User.objects.filter(email=email).exclude(username=self.instance.username).exists():
-            raise forms.ValidationError('El correo ya existe')
-        return email
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if username and User.objects.filter(username=username).exclude(username=self.instance.username).exists():
-            raise forms.ValidationError('El usuario ya existe')
-        return username   """  
+### def clean_email(self):
+    #    email = self.cleaned_data.get('email')
+    #    if email and User.objects.filter(email=email).exclude(username=self.instance.username).exists():
+     #       raise forms.ValidationError('El correo ya existe')
+    #    return email
+   # def clean_username(self):
+    #    username = self.cleaned_data.get('username')
+    #    if username and User.objects.filter(username=username).exclude(username=self.instance.username).exists():
+    #        raise forms.ValidationError('El usuario ya existe')
+     #   return username   """  
 
 
 
@@ -99,7 +100,7 @@ class EventoForm(forms.ModelForm):
     propietario=forms.CharField(max_length=100)
     titulo     =forms.CharField(max_length=100)
     subtitulo  =forms.CharField()
-    cuerpo     =forms.CharField(widget=forms.Textarea)
+    cuerpo     =RichTextField(verbose_name="Contenido")
     autor      =forms.CharField(max_length=100)
     fecha      =forms.DateField(widget=forms.SelectDateWidget, initial=timezone.now())
     imagen     =forms.ImageField()

@@ -35,9 +35,12 @@ urlpatterns = [
 
 
     path("eventoFormulario/", evento, name="evento_Formulario"),
-
-
-
+    path("pages/", leerEventos, name="leerEventos"),
+    path("eliminarEvento/<id>", eliminarEvento, name="eliminarEvento"),
+    path("editarEvento/<id>", editarEvento, name="editarEvento"),
+    path("pages/<id>", leerMas, name="leerMas"),
+    path("about/", about, name="about"),
 ]
+
 if settings.DEBUG: #add this
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
