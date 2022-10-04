@@ -16,7 +16,12 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-    return render (request, "index.html")
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista) != 0:
+        avatar = lista[0].imagen.url
+    else:
+        avatar = ""
+    return render (request, "index.html" , {"avatar":avatar})
     #mymembers = {'saludo':"Hola"}#"Members.objects.all().values()"
     #template2 = loader.get_template('index.html')
     #context = {
@@ -67,18 +72,19 @@ def listar_usuarios(request):
     return render(request, "usuarios/listar.html", {"usuarios":usuarios})
 
 
-
-def editar_usuarios(request,id):
-    usuario = User.objects.get(id=id)
+@login_required
+def editar_usuarios(request):
+    usuario = request.user
     if request.method == 'POST':
-        form = form_editar_usuarios(request.POST,instance=usuario)
+        form = form_editar_usuarios(request.POST)
         if form.is_valid():
-            usuario.username   = form.cleaned_data.get('username')
-            usuario.first_name = form.cleaned_data.get('first_name')
-            usuario.last_name  = form.cleaned_data.get('last_name')
-            usuario.email      = form.cleaned_data.get('email')
+            info=form.cleaned_data
+            usuario.username   = info['username']
+            usuario.first_name = info['nombre']
+            usuario.last_name  = info['apellido']
+            usuario.email      = info['email']
             usuario.save()
-            return render(request, 'usuarios/editar.html', {'mensaje':"Editado correctamente"})
+            return render(request, 'usuarios/editar.html', {'mensaje':"Perfil editado correctamente"})
         else:
             return render(request, "usuarios/editar.html", {"formulario":form, "usuario":usuario, "mensaje":"FORMULARIO INVALIDO"})
     else:
@@ -93,6 +99,11 @@ def eliminar_usuario(request,id):
 
 @login_required
 def ver_perfil(request, username= None):
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista) != 0:
+        avatar = lista[0].imagen.url
+    else:
+        avatar = ""
     current_user = request.user
     if username and username != current_user.username:
         user = User.objects.get(username=username)

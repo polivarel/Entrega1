@@ -43,7 +43,8 @@
                     </li>
                     <li>
                         <a href="{% url 'ver_perfil' %}">{{ user.username }}</a>
-                    </li>            
+                        <img src="{{ avatar }}" alt="">
+                    </li>       
                     {% else %}
                     <li>
                         <a href="{% url 'form_crear_usuario' %}">Registrarse</a>
@@ -65,6 +66,10 @@
                 </div>
             </div>
         </header>
+        {% block titulo %}
+
+        {% endblock %}
+
         {% block cuerpo %}
 
         {% endblock %}
